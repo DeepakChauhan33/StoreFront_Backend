@@ -7,12 +7,12 @@ const userSchema = new mongoose.Schema(
 
     name: {
       type: String,
-      require: true
+      required: true
     },
 
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
 
@@ -21,12 +21,13 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
   },
+
   {
     timestamps: true,
   }
 
 );
 
-const user = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema); // This tells Mongoose to store documents in a collection called users
 
-export default UserActivation;
+module.exports = User;
