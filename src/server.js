@@ -12,6 +12,12 @@ connectDB();
 
 const app = express();
 
+// IMporting bcrypt
+const bcrypt = require('bcryptjs');
+
+// IMporting josn web token
+const jwt = require('jsonwebtoken');
+
 
 // Middleware to parse incoming JSON and form data  
 app.use(express.json());
@@ -43,8 +49,10 @@ app.get('/sign-in', (req, res) => {
 app.post('/create', async (req, res) => {
   const { name, email, password } = req.body;
 
+  const hashPassword = await bcrypt.hash(password, 10); // Hashing Password
+
   let createdUser = await userModel.create({
-    name, email, password
+    name, email, password: hashPassword
   })
 
   res.send(createdUser);
@@ -60,17 +68,45 @@ app.get('/login', (req, res) => {
 
 });
 
-
+// Login 
 app.post('/login', async (req, res) => {
 
-  try {
-    let user = await userModel.findOne({ email: req.body.email });
-    console.log(user);
+  const { email, password } = req.body;
 
-  } catch (error) {
-    res.send("Not found");
+  const user = await userModel.findOne({ email });
+
+  if (!user) {
+    return res.status(400).json({
+      message: "User not found"
+    });
   }
+
+
+  const isMatch = await bcrypt.compare(
+    password,
+    user.password
+  );
+
+
+  if (!isMatch) {
+    return res.status(400).json({
+      message: "Invalid Password"
+    })
+  }
+
+  res.json({
+    message: "Login Success"
+  })
+
+
+
 })
+
+
+
+
+
+
 
 
 app.listen(PORT, () => {
