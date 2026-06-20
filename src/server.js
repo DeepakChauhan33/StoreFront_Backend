@@ -3,7 +3,6 @@ const express = require('express');
 // Comment
 const connectDB = require('../config/db');
 
-const userModel = require('../src/models/user.js');
 
 
 require('dotenv').config();
@@ -11,6 +10,16 @@ require('dotenv').config();
 connectDB();
 
 const app = express();
+
+// User Data
+const userModel = require('../src/models/user.js');
+
+
+// Routes
+
+//User Route
+const userRoute = require('./routes/authRoute.js');
+
 
 // IMporting bcrypt
 const bcrypt = require('bcryptjs');
@@ -38,85 +47,93 @@ app.get('/', (req, res) => {
 })
 
 
+// Using Route mini app
+app.use('/api/user', userRoute);
+
+
+
+
+
+
 // sign url
-app.get('/sign-in', (req, res) => {
-  console.log("PORT from env:", process.env.PORT);
-  res.render('signForm.ejs');
-});
+// app.get('/sign-in', (req, res) => {
+//   console.log("PORT from env:", process.env.PORT);
+//   res.render('signForm.ejs');
+// });
 
 
 // create url
-app.post('/create', async (req, res) => {
-  const { name, email, password } = req.body;
+// app.post('/create', async (req, res) => {
+//   const { name, email, password } = req.body;
 
-  const hashPassword = await bcrypt.hash(password, 10); // Hashing Password
+//   const hashPassword = await bcrypt.hash(password, 10); // Hashing Password
 
-  let createdUser = await userModel.create({
-    name, email, password: hashPassword
-  })
+//   let createdUser = await userModel.create({
+//     name, email, password: hashPassword
+//   })
 
-  res.send(createdUser);
-})
+//   res.send(createdUser);
+// })
 
 
 
 // Login Url
 
-app.get('/login', (req, res) => {
+// app.get('/login', (req, res) => {
 
-  res.render('loginForm.ejs');
+//   res.render('loginForm.ejs');
 
-});
+// });
 
-// Login 
-app.post('/login', async (req, res) => {
+// // Login 
+// app.post('/login', async (req, res) => {
 
-  const { email, password } = req.body;
+//   const { email, password } = req.body;
 
-  const user = await userModel.findOne({ email });
+//   const user = await userModel.findOne({ email });
 
-  if (!user) {
-    return res.status(400).json({
-      message: "User not found"
-    });
-  }
-
-
-  const isMatch = await bcrypt.compare(
-    password,
-    user.password
-  );
+//   if (!user) {
+//     return res.status(400).json({
+//       message: "User not found"
+//     });
+//   }
 
 
-  if (!isMatch) {
-    return res.status(400).json({
-      message: "Invalid Password"
-    })
-  }
+//   const isMatch = await bcrypt.compare(
+//     password,
+//     user.password
+//   );
 
 
-  const token = jwt.sign(
+//   if (!isMatch) {
+//     return res.status(400).json({
+//       message: "Invalid Password"
+//     })
+//   }
 
-    {
-      userId: user._id
-    },
 
-    process.env.JWT_SECRET,
+//   const token = jwt.sign(
 
-    
+//     {
+//       userId: user._id
+//     },
 
-    {
-      expiresIn: "7d"
-    }
-  )
-
-  res.json({
-    token
-  });
+//     process.env.JWT_SECRET,
 
 
 
-})
+//     {
+//       expiresIn: "7d"
+//     }
+//   )
+
+//   res.json({
+//     token
+//   });
+
+
+
+// })
 
 
 
