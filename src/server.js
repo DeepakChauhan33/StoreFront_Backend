@@ -1,46 +1,55 @@
 const express = require('express');
+require('dotenv').config();
+
+
 
 // Comment
 const connectDB = require('../config/db');
 
 
 
-require('dotenv').config();
-
 connectDB();
 
+
+
+// Creating Express app
 const app = express();
 
-// User Data
-const userModel = require('../src/models/user.js');
-
-
-// Routes
-
-//User Route
-const userRoute = require('./routes/authRoute.js');
-
-
-// IMporting bcrypt
-const bcrypt = require('bcryptjs');
-
-// IMporting josn web token
-const jwt = require('jsonwebtoken');
 
 
 // Middleware to parse incoming JSON and form data  
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// IMPORTANT TO ADD IN NOTES 
 
+
+
+// IMporting bcrypt
+const bcrypt = require('bcryptjs');
+
+// Importing josn web token
+const jwt = require('jsonwebtoken');
 
 
 
 // EJS 
 app.set('view engine', 'ejs');
 
-// Comment
-const PORT = process.env.PORT || 3000;
+// User Data
+const userModel = require('../src/models/user.js');
+
+
+
+//User Route
+const authRoutes = require('./routes/authRoute.js');
+
+
+
+
+
+
+
+
+
 
 app.get('/', (req, res) => {
   res.send("Welcome to the server");
@@ -48,7 +57,7 @@ app.get('/', (req, res) => {
 
 
 // Using Route mini app
-app.use('/api/user', userRoute);
+app.use('/user', authRoutes);
 
 
 
@@ -140,7 +149,8 @@ app.use('/api/user', userRoute);
 
 
 
-
+// Comment
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${process.env.PORT}/`);

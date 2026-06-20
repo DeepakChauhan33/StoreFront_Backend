@@ -3,9 +3,15 @@ const router = express.Router();
 
 
 // Importing Authentication Controllers
-const { register } = require('../controllers/authController')
+const { register, getSignInForm, loginForm, checkLogin } = require('../controllers/authController');
 
-router.get('/sign-in', (req, res) => {
-  // console.log("PORT from env:", process.env.PORT);
-  res.render('signForm.ejs');
-});
+
+router.get('/sign-in', getSignInForm);
+
+router.post('/register', register);
+
+router.get('/login', loginForm);
+
+router.post('/login', checkLogin);
+
+module.exports = router;
