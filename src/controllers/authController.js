@@ -5,7 +5,10 @@ const jwt = require('jsonwebtoken');
 
 
 
-const userModel = require('../models/user.js');
+const User = require('../models/user.js');
+
+
+
 
 
 const getSignInForm = (req, res) => res.render('signForm');
@@ -22,7 +25,7 @@ const register = async (req, res) => {
 
     const hashPassword = await bcrypt.hash(password, 10);
 
-    let newUser = await userModel.create({
+    let newUser = await User.create({
       name,
       email,
       password: hashPassword
@@ -45,14 +48,13 @@ const loginForm = (req, res) => res.render('loginForm');
 
 
 
-
 const checkLogin = async (req, res) => {
 
   try {
 
     const { email, password } = req.body;
 
-    const user = await userModel.findOne({ email });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).json({ message: "User not found" })

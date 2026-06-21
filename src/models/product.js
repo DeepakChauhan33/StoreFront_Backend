@@ -34,6 +34,11 @@ const productSchema = new mongoose.Schema(
       trim: true
     },
 
+    stock: {
+      type: Number,
+      default: 0,
+    },
+
     image: {
       type: String,
       required: true,
@@ -47,6 +52,12 @@ const productSchema = new mongoose.Schema(
   },
 
   {
-    timestamps: true;
+    timestamps: true
   }
 );
+
+
+
+const product = mongoose.model("product", productSchema);
+
+module.exports = product;

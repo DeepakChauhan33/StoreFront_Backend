@@ -35,12 +35,15 @@ const jwt = require('jsonwebtoken');
 app.set('view engine', 'ejs');
 
 // User Data
-const userModel = require('../src/models/user.js');
+const User = require('../src/models/user.js');
 
 
 
 //User Route
 const authRoutes = require('./routes/authRoute.js');
+
+// Product Routes
+const productRoutes = require('./routes/productRoutes.js');
 
 
 
@@ -60,6 +63,9 @@ app.get('/', (req, res) => {
 app.use('/user', authRoutes);
 
 
+app.use('/product', productRoutes)
+
+
 
 
 
@@ -77,7 +83,7 @@ app.use('/user', authRoutes);
 
 //   const hashPassword = await bcrypt.hash(password, 10); // Hashing Password
 
-//   let createdUser = await userModel.create({
+//   let createdUser = await User.create({
 //     name, email, password: hashPassword
 //   })
 
@@ -99,7 +105,7 @@ app.use('/user', authRoutes);
 
 //   const { email, password } = req.body;
 
-//   const user = await userModel.findOne({ email });
+//   const user = await User.findOne({ email });
 
 //   if (!user) {
 //     return res.status(400).json({
