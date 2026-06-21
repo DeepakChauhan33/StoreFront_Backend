@@ -1,4 +1,5 @@
 
+const { json } = require('express');
 const Products = require('../models/product');
 
 
@@ -65,11 +66,13 @@ const getProductById = async (req, res) => {
 
   try {
 
-    const id = req.params;
+    const id = req.params.id;
 
-    console.log(id);
+    const product = await Products.findById(id);
 
-    const product = Products.findOne({ id });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
 
     res.status(200).json(product);
 

@@ -15,6 +15,10 @@ connectDB();
 // Creating Express app
 const app = express();
 
+const cors = require("cors");
+
+app.use(cors());
+
 
 
 // Middleware to parse incoming JSON and form data  

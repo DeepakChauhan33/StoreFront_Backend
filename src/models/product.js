@@ -49,10 +49,6 @@ const productSchema = new mongoose.Schema(
       count: { type: Number, required: true, min: 0 }
     }
 
-  },
-
-  {
-    timestamps: true
   }
 );
 
