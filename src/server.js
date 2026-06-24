@@ -20,6 +20,14 @@ const cors = require("cors");
 app.use(cors());
 
 
+const cookieParser = require("cookie-parser");
+
+
+
+
+app.use(cookieParser());
+
+
 
 // Middleware to parse incoming JSON and form data  
 app.use(express.json());

@@ -67,19 +67,21 @@ const checkLogin = async (req, res) => {
     }
 
 
-    //  const token = jwt.sign(
+    const token = jwt.sign(
 
-    //     {
-    //       userId: user._id
-    //     },
+      {
+        userId: user._id
+      },
 
-    //     process.env.JWT_SECRET,
+      process.env.JWT_SECRET,
 
-    //     {
-    //       expiresIn: "7d"
-    //     }
-    //   )
+      {
+        expiresIn: "7d"
+      }
+    )
 
+
+    res.cookie("token", token);
 
     res.status(200).json({ message: "login successful" })
 
