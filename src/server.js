@@ -57,6 +57,9 @@ const authRoutes = require('./routes/authRoute.js');
 // Product Routes
 const productRoutes = require('./routes/productRoutes.js');
 
+// Order ROutes
+const orderRoutes = require('./routes/orderRoute.js');
+
 
 
 
@@ -75,7 +78,10 @@ app.get('/', (req, res) => {
 app.use('/user', authRoutes);
 
 
-app.use('/product', productRoutes)
+app.use('/product', productRoutes);
+
+
+app.use('/order', orderRoutes);
 
 
 
