@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Create Order</title>
+</head>
+
+<body>
+  <h1>Create New Order</h1>
+
+  <form action="/orders" method="POST">
+    <!-- User ID -->
+    <label for="user">User ID:</label>
+    <input type="text" id="user" name="user" required>
+    <br><br>
+
+    <!-- Product 1 -->
+    <fieldset>
+      <legend>Product 1</legend>
+      <label for="productId1">Product ID:</label>
+      <input type="text" id="productId1" name="products[0][productId]" required><br>
+
+      <label for="title1">Title:</label>
+      <input type="text" id="title1" name="products[0][title]" required><br>
+
+      <label for="price1">Price:</label>
+      <input type="number" id="price1" name="products[0][price]" required><br>
+
+      <label for="quantity1">Quantity:</label>
+      <input type="number" id="quantity1" name="products[0][quantity]" required>
+    </fieldset>
+
+    <!-- Product 2 -->
+    <fieldset>
+      <legend>Product 2</legend>
+      <label for="productId2">Product ID:</label>
+      <input type="text" id="productId2" name="products[1][productId]"><br>
+
+      <label for="title2">Title:</label>
+      <input type="text" id="title2" name="products[1][title]"><br>
+
+      <label for="price2">Price:</label>
+      <input type="number" id="price2" name="products[1][price]"><br>
+
+      <label for="quantity2">Quantity:</label>
+      <input type="number" id="quantity2" name="products[1][quantity]">
+    </fieldset>
+
+    <!-- Total Amount -->
+    <label for="totalAmount">Total Amount:</label>
+    <input type="number" id="totalAmount" name="totalAmount" required>
+    <br><br>
+
+    <button type="submit">Submit Order</button>
+  </form>
+</body>
+
+</html>

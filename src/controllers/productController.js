@@ -39,7 +39,7 @@ const productRegister = async (req, res) => {
     res.status(201).json(newProduct);
 
   } catch (error) {
-    res.status(400).json({ message: error.message });
+      
   }
 };
 
