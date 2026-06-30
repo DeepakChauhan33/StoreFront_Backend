@@ -43,6 +43,12 @@ const jwt = require('jsonwebtoken');
 
 
 
+// Middlewares 
+
+const authMiddleware  = require('../src/middleware/authMiddleware.js');
+
+
+
 // EJS 
 app.set('view engine', 'ejs');
 
@@ -81,92 +87,8 @@ app.use('/user', authRoutes);
 app.use('/product', productRoutes);
 
 
-app.use('/order', orderRoutes);
+app.use('/order', authMiddleware, orderRoutes);
 
-
-
-
-
-
-// sign url
-// app.get('/sign-in', (req, res) => {
-//   console.log("PORT from env:", process.env.PORT);
-//   res.render('signForm.ejs');
-// });
-
-
-// create url
-// app.post('/create', async (req, res) => {
-//   const { name, email, password } = req.body;
-
-//   const hashPassword = await bcrypt.hash(password, 10); // Hashing Password
-
-//   let createdUser = await User.create({
-//     name, email, password: hashPassword
-//   })
-
-//   res.send(createdUser);
-// })
-
-
-
-// Login Url
-
-// app.get('/login', (req, res) => {
-
-//   res.render('loginForm.ejs');
-
-// });
-
-// // Login 
-// app.post('/login', async (req, res) => {
-
-//   const { email, password } = req.body;
-
-//   const user = await User.findOne({ email });
-
-//   if (!user) {
-//     return res.status(400).json({
-//       message: "User not found"
-//     });
-//   }
-
-
-//   const isMatch = await bcrypt.compare(
-//     password,
-//     user.password
-//   );
-
-
-//   if (!isMatch) {
-//     return res.status(400).json({
-//       message: "Invalid Password"
-//     })
-//   }
-
-
-//   const token = jwt.sign(
-
-//     {
-//       userId: user._id
-//     },
-
-//     process.env.JWT_SECRET,
-
-
-
-//     {
-//       expiresIn: "7d"
-//     }
-//   )
-
-//   res.json({
-//     token
-//   });
-
-
-
-// })
 
 
 

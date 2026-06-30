@@ -6,6 +6,7 @@ const router = express.Router();
 const { register, getSignInForm, loginForm, checkLogin } = require('../controllers/authController');
 
 
+
 router.get('/sign-in', getSignInForm);
 
 router.post('/register', register);
