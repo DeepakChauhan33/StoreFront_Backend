@@ -13,7 +13,8 @@ const placeOrder = (req, res) => res.render('orderForm');
 
 const createOrder = async (req, res) => {
 
-  const { user, products, totalAmount } = req.body;
+  const { products, totalAmount } = req.body;
+  const user = req.user.userId;
 
   try {
 

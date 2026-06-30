@@ -17,7 +17,12 @@ const app = express();
 
 const cors = require("cors");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true
+  })
+);
 
 
 const cookieParser = require("cookie-parser");
@@ -87,7 +92,7 @@ app.use('/user', authRoutes);
 app.use('/product', productRoutes);
 
 
-app.use('/order', authMiddleware, orderRoutes);
+app.use('/order',  orderRoutes);
 
 
 
