@@ -4,10 +4,6 @@ const { schema } = require('./user');
 const productSchema = new mongoose.Schema(
 
   {
-    _id: {
-      type: Number,
-      required: true
-    },
 
 
     title: {
@@ -17,7 +13,7 @@ const productSchema = new mongoose.Schema(
     },
 
     price: {
-      type: String,
+      type: Number,
       required: true,
       min: 0
     },
