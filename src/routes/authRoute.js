@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 // Importing Authentication Controllers
-const { register, getSignInForm, loginForm, checkLogin } = require('../controllers/authController');
+const { register, getSignInForm, loginForm, login } = require('../controllers/authController');
 
 
 
@@ -13,6 +13,6 @@ router.post('/register', register);
 
 router.get('/login', loginForm);
 
-router.post('/login', checkLogin);
+router.post('/login', login);
 
 module.exports = router;

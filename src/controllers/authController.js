@@ -48,7 +48,7 @@ const loginForm = (req, res) => res.render('loginForm');
 
 
 
-const checkLogin = async (req, res) => {
+const login = async (req, res) => {
 
   try {
 
@@ -81,9 +81,18 @@ const checkLogin = async (req, res) => {
     )
 
 
-    res.cookie("token", token);
+    // res.cookie("token", token);
 
-    res.status(200).json({ message: "login successful" })
+    res.status(200).json({
+
+      message: "login successful",
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email
+      }
+    })
 
 
   } catch (error) {
@@ -96,5 +105,5 @@ module.exports = {
   register,
   getSignInForm,
   loginForm,
-  checkLogin
+  login
 };
