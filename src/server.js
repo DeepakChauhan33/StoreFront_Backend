@@ -2,14 +2,11 @@ const express = require('express');
 require('dotenv').config();
 
 
-
 // Comment
 const connectDB = require('../config/db');
 
 
-
 connectDB();
-
 
 
 // Creating Express app
@@ -26,8 +23,6 @@ app.use(
 
 
 const cookieParser = require("cookie-parser");
-
-
 
 
 app.use(cookieParser());
