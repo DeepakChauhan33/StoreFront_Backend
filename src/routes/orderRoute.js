@@ -16,7 +16,7 @@ router.get('/order', placeOrder);
 router.post('/createOrder', authMiddleware, createOrder);
 
 
-router.get('/orders', getOrders);
+router.get('/orders', authMiddleware, getOrders);
 
 
 
