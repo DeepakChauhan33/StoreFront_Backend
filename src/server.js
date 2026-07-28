@@ -45,7 +45,7 @@ const jwt = require('jsonwebtoken');
 
 // Middlewares 
 
-const authMiddleware  = require('../src/middleware/authMiddleware.js');
+const authMiddleware = require('../src/middleware/authMiddleware.js');
 
 
 
@@ -65,6 +65,10 @@ const productRoutes = require('./routes/productRoutes.js');
 
 // Order ROutes
 const orderRoutes = require('./routes/orderRoute.js');
+
+
+// Wishlist Routes
+const wishlistRoutes = require("./routes/wishlistRoute.js");
 
 
 
@@ -87,8 +91,10 @@ app.use('/user', authRoutes);
 app.use('/product', productRoutes);
 
 
-app.use('/order',  orderRoutes);
+app.use('/order', orderRoutes);
 
+
+app.use("/wishlist", wishlistRoutes);
 
 
 
