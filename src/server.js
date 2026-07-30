@@ -71,6 +71,10 @@ const orderRoutes = require('./routes/orderRoute.js');
 const wishlistRoutes = require("./routes/wishlistRoute.js");
 
 
+// Cart Routes
+const cartRoute = require("./routes/cartRoute.js");
+
+
 
 
 
@@ -95,6 +99,9 @@ app.use('/order', orderRoutes);
 
 
 app.use("/wishlist", wishlistRoutes);
+
+
+app.use('/cart', cartRoute);
 
 
 
