@@ -1,31 +1,30 @@
 const express = require("express");
+
 const router = express.Router();
 
-// Controllers
+const authMiddleware = require("../middleware/authMiddleware");
+
 const {
-  addToCart,
   getCart,
-  updateCart,
+  addToCart,
+  updateQuantity,
   removeFromCart,
   clearCart,
 } = require("../controllers/cartController");
 
 
-const authMiddleware = require("../middleware/authMiddleware");
-
+router.get("/", authMiddleware, getCart);
 
 router.post("/add", authMiddleware, addToCart);
 
-
-router.get("/", authMiddleware, getCart);
-
-
-router.put("/update", authMiddleware, updateCart);
-
+router.put("/update", authMiddleware, updateQuantity);
 
 router.delete("/remove/:productId", authMiddleware, removeFromCart);
 
-
 router.delete("/clear", authMiddleware, clearCart);
 
+
+// router.get("/test", (req, res) => {
+//   res.json({ message: "Update route works" });
+// });
 module.exports = router;

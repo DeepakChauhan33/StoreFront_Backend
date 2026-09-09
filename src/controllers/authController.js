@@ -11,7 +11,7 @@ const User = require('../models/user.js');
 
 
 
-const getSignInForm = (req, res) => res.render('signForm');
+const getSignInForm = (req, res) => res.rener('signForm');
 
 
 
@@ -31,7 +31,7 @@ const register = async (req, res) => {
       password: hashPassword
     });
 
-    res.status(200).json({ id: newUser._id, name: newUser.name, email: newUser.email});
+    res.status(200).json({ id: newUser._id, name: newUser.name, email: newUser.email });
 
   } catch (error) {
     res.status(400).json({ message: error.message })
