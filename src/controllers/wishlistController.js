@@ -76,9 +76,7 @@ const getWishlist = async (req, res) => {
 
 
 const removeWishlistItem = async (req, res) => {
-
   try {
-
     const wishlist = await Wishlist.findOne({
       user: req.user.userId,
     });
@@ -90,7 +88,7 @@ const removeWishlistItem = async (req, res) => {
     }
 
     wishlist.products = wishlist.products.filter(
-      (item) => item._id !== req.params.id
+      (item) => item._id.toString() !== req.params.id
     );
 
     await wishlist.save();
@@ -98,13 +96,10 @@ const removeWishlistItem = async (req, res) => {
     res.json(wishlist.products);
 
   } catch (error) {
-
     res.status(500).json({
       message: error.message,
     });
-
   }
-
 };
 
 
